@@ -1,5 +1,5 @@
 import { Todo } from "@/types";
-import TodoItem from "./TodoItem";
+import { Divider, List, Typography } from "antd";
 
 interface TodoListProps {
   todos: Array<Todo>;
@@ -9,16 +9,23 @@ interface TodoListProps {
 
 function TodoList({ todos, toggleTodo, deleteTodo }: TodoListProps) {
   return (
-    <ul>
-      {todos.map((todo) => (
-        <TodoItem
-          key={todo.id}
-          todo={todo}
-          toggleTodo={toggleTodo}
-          deleteTodo={deleteTodo}
-        ></TodoItem>
-      ))}
-    </ul>
+    <>
+      <List
+        bordered
+        dataSource={todos}
+        renderItem={(item) => (
+          <List.Item
+            style={{ textDecoration: item.completed ? "line-through" : "none" }}
+            actions={[
+              <button onClick={() => toggleTodo(item.id)}>切换状态</button>,
+              <button onClick={() => deleteTodo(item.id)}>删除</button>,
+            ]}
+          >
+            {item.text}
+          </List.Item>
+        )}
+      />
+    </>
   );
 }
 

@@ -4,12 +4,21 @@ import TodoFilter from "@/components/TodoFilter";
 import TodoList from "@/components/TodoList";
 import { useState } from "react";
 import { Todo } from "@/types";
+import { Typography } from 'antd';
+import { Input } from "antd";
+
+const { Title } = Typography;
+
 
 export default function Home() {
 
   const [todos, setTodos] = useState<Todo[]>([]);
   const [filter, setFilter] = useState<string>("all");
 
+  /**
+   * 添加代办事
+   * @param text 
+   */
   const addTodo = (text: string) => {
     const newTodo = {
       id: Math.random(),
@@ -61,7 +70,7 @@ export default function Home() {
 
   return (
     <div>
-      <h1>TodeList</h1>
+      <Title>代办事项</Title>
       <AddTodo addTodo={addTodo}></AddTodo>
       <TodoList
         todos={getFilteredTodos()}

@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { Input } from "antd";
+import { Button, Flex } from "antd";
 
 interface AddTodoProps {
   addTodo: (text: string) => void;
@@ -9,21 +11,25 @@ function AddTodo({ addTodo }: AddTodoProps) {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (text.trim() === '') {
+    if (text.trim() === "") {
       return;
     }
     addTodo(text);
-    setText("")
+    setText("");
   };
 
   return (
     <form onSubmit={handleSubmit}>
-      <input
+      <Input
+        placeholder="请输入事项。"
         value={text}
         onChange={(e) => setText(e.target.value)}
-        type="text"
+        size={"large"}
+        style={{ width: "30%" }}
       />
-      <button>新建事项</button>
+      <Button type="primary" htmlType="submit" size={"large"} style={{marginLeft: "10px"}}>
+        添加
+      </Button>
     </form>
   );
 }
